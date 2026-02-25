@@ -2,7 +2,6 @@
 import { getSongs } from "@/lib/microcms";
 import SongGrid from "./components/SongGrid";
 import FilterSection from "./components/FilterSection";
-import Header from "./components/Header";
 import ArtistScroll from "./components/ArtistScroll";
 import ChartScroll from "./components/ChartScroll";
 

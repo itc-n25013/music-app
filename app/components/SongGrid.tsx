@@ -1,6 +1,6 @@
 // app/components/SongGrid.tsx
 import React from "react";
-import { Song, Artist, Tag } from "@/lib/microcms";
+import { Song } from "@/lib/microcms";
 
 type Props = {
   songs: Song[];
