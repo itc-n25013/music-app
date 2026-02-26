@@ -1,9 +1,9 @@
-// app/page.tsx
 import { getSongs } from "@/lib/microcms";
 import SongGrid from "./components/SongGrid";
 import FilterSection from "./components/FilterSection";
 import ArtistScroll from "./components/ArtistScroll";
 import ChartScroll from "./components/ChartScroll";
+import { Suspense } from "react";
 
 export const forceDynamic = "force-dynamic";
 
@@ -16,9 +16,8 @@ export default async function HomePage({
   const params = await searchParams;
 
   const query = params.q?.toLowerCase() || "";
-  const tagQuery = params.tag || ""; // 大文字小文字をCMSに合わせるため
+  const tagQuery = params.tag || "";
 
-  // 1. 48曲全てからフィルタリング
   const filteredSongs = allSongs.filter((song) => {
     const titleMatch = song.title.toLowerCase().includes(query);
     const artistMatch = song.artists?.some((a) =>
@@ -34,11 +33,9 @@ export default async function HomePage({
     return searchMatch && tagMatch;
   });
 
-  // 🌟 複雑な要求の核心：初期状態かどうかの判定
   const isInitialState =
     query === "" && (tagQuery === "" || tagQuery === "all");
 
-  // 🌟 初期なら12枚固定、検索・タグ選択中なら20枚まで表示
   const displayLimit = isInitialState ? 12 : 20;
   const displaySongs = filteredSongs.slice(0, displayLimit);
 
@@ -67,8 +64,15 @@ export default async function HomePage({
             </div>
           </div>
 
-          <FilterSection />
-          {/* 🌟 isExpandedプロパティを渡す */}
+          {/* FilterSectionは内部でuseSearchParamsを使用するためSuspenseが必要 */}
+          <Suspense
+            fallback={
+              <div className="h-20 w-full bg-white/5 animate-pulse rounded-2xl" />
+            }
+          >
+            <FilterSection />
+          </Suspense>
+
           <SongGrid songs={displaySongs} isExpanded={!isInitialState} />
         </section>
 

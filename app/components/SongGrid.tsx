@@ -35,9 +35,9 @@ export default function SongGrid({ songs, isExpanded }: Props) {
             </p>
 
             <div className="flex flex-wrap gap-2 mb-8">
-              {song.tags?.map((tag) => (
+              {song.tags?.map((tag, index) => (
                 <span
-                  key={tag.id}
+                  key={`${tag.id}-${index}`}
                   className="bg-white/5 text-gray-400 text-[10px] px-3 py-1 rounded-full border border-white/5 uppercase tracking-widest"
                 >
                   {tag.name}

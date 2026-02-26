@@ -1,6 +1,7 @@
 // app/layout.tsx
 import "./globals.css";
-import Header from "./components/Header"; // 読み込み
+import Header from "./components/Header";
+import { Suspense } from "react"; // 1. Suspenseをインポート
 
 export default function RootLayout({
   children,
@@ -9,9 +10,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      {/* 背景色はここで管理 */}
       <body className="bg-[#121212] text-white min-h-screen">
-        <Header /> {/* ここに置くだけ！ */}
+        {/* 2. HeaderをSuspenseで囲む */}
+        <Suspense fallback={<div className="h-20 bg-[#121212]" />}>
+          <Header />
+        </Suspense>
+
         {children}
       </body>
     </html>
