@@ -28,7 +28,7 @@ export type Song = {
 export const getSongs = async (): Promise<Song[]> => {
   const data = await client.get<{ contents: Song[] }>({
     endpoint: "songs",
-    queries: { limit: 12 }, // ← ここに limit: 12 を追加！
+    queries: { limit: 100 }, // ← ここに limit: 12 を追加！
     customRequestInit: {
       cache: "no-store",
     },

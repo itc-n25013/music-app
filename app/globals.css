@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-@utility scrollbar-hide {
+/* これを一番下に追加（あるいは既存のものを上書き） */
+@utility no-scrollbar {
   &::-webkit-scrollbar {
     display: none;
   }
