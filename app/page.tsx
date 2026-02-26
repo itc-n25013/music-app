@@ -5,7 +5,7 @@ import ArtistScroll from "./components/ArtistScroll";
 import ChartScroll from "./components/ChartScroll";
 import { Suspense } from "react";
 
-export const forceDynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
 export default async function HomePage({
   searchParams,
